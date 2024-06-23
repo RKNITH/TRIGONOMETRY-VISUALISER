@@ -33,8 +33,8 @@
   /**
    * Constants
    */
-  const tPI = 2 * Math.PI; 
-  
+  const tPI = 2 * Math.PI;
+
   const COLORS = {
     white: '#fff',
     snow: '#fafafa',
@@ -92,7 +92,7 @@
    */
   const canvasWrapper = document.querySelector(".canvas-wrapper");
   const canvas = document.querySelector("canvas");
-  
+
   /**
    * Helper utils.
    */
@@ -129,7 +129,7 @@
 
     if (angle) {
       options.angle = false;
-      
+
       return withAngle(x, y, angle, () =>
         $drawText(0, 0, text, options)
       );
@@ -152,18 +152,18 @@
 
     if (angle) {
       options.angle = false;
-      
+
       return withAngle(x, y, angle, () =>
         $drawRect(0, 0, w, h, options)
       );
     }
 
     ctx.lineWidth = lineWidth,
-    ctx.strokeStyle = color;
+      ctx.strokeStyle = color;
     ctx.fillStyle = color;
     ctx.rect(x, y, w, h);
     fill ? ctx.fill() : ctx.stroke();
-  }; 
+  };
 
   const $drawLine = (fromX, fromY, toX, toY, {
     color,
@@ -215,7 +215,7 @@
       lastFPSUpdateTime = now;
       FPS = (1000 / (now - lastDrawTime)).toFixed(0);
     }
-    
+
     lastDrawTime = now;
 
     return FPS;
@@ -248,7 +248,7 @@
     const cosWidth = lineX - x;
 
     // Findout the quadrant we are in.
-    const quadrant = { '01': 1, '00': 2, '10': 3, '11': 4 }[`${+(sin>0)}${+(cos>0)}`];
+    const quadrant = { '01': 1, '00': 2, '10': 3, '11': 4 }[`${+(sin > 0)}${+(cos > 0)}`];
     const evenQuad = (quadrant % 2);
 
     // Calculate complementary degree of main angle.
@@ -258,7 +258,7 @@
     const tanOfCoDegree = Math.tan(degToRad(coDegree));
     const tanDistance = sinHeight / tanOfCoDegree;
     const cotDistance = cosWidth / (1 / tanOfCoDegree);
-    
+
     // Calculate tangent and cotangent start/end positions.
     const tanX = evenQuad ? (lineX + tanDistance) : (lineX - tanDistance);
     const cotY = evenQuad ? (lineY - cotDistance) : (lineY + cotDistance);
@@ -272,12 +272,12 @@
     // Clear canvas.
     ctx.fillStyle = COLORS.white;
     ctx.fillRect(0, 0, w, h);
-    
+
     // Draw main circle.
     $drawCircle(x, y, r, { color: COLORS.gray });
     // Draw core main filled circle.
     $drawCircle(x, y, 20, { color: COLORS.snow, fill: true });
-    
+
     // Draw X Axis
     config.drawLineXAxis && $drawLine(0, y, w, y, { color: COLORS.gray });
     // Draw Y Axis
@@ -292,7 +292,7 @@
 
     // Draw origin point.
     $drawCircle(x, y, 3, { color: COLORS.night, fill: true });
-    
+
     // Draw tangent/cotangent & radius right angle square.
     const rightAngleSquareSide = 12;
     const rightAngleSquareHeight = quadrant > 2 ? -rightAngleSquareSide : rightAngleSquareSide;
@@ -330,22 +330,22 @@
       // Draw secant text.
       config.drawNameSec && $drawText(x + (tanX - x) / 2, y + 17, name.sec, { color: COLORS.blue });
       // Draw cosecant text.
-      config.drawNameCsc && $drawText(x - 17, y + (cotY - y) / 2, name.csc, { color: COLORS.cyan, angle: 90 });  
+      config.drawNameCsc && $drawText(x - 17, y + (cotY - y) / 2, name.csc, { color: COLORS.cyan, angle: 90 });
     }
 
     // Draw radius line end circle.
     $drawCircle(lineX, lineY, 3, { color: COLORS.night, fill: true });
 
     // Calculate FPS.
-    config.drawNameFPS && config.play && !$state.drag && $drawText(5, 17, `FPS: ${calculateFPS() || '-'}`, { align: 'left' });  
-    
+    config.drawNameFPS && config.play && !$state.drag && $drawText(5, 17, `FPS: ${calculateFPS() || '-'}`, { align: 'left' });
+
     // Draw name of author and help.
     config.drawNameInfo && $drawText(w - 10, 20, 'You can click & drag!', { align: 'right' });
-    
+
     if (config.drawNameCredits) {
-      $drawText(w - 10, h - 42, '2018', { align: 'right' });
-      $drawText(w - 10, h - 27, 'trigonoparty', { align: 'right' });
-      $drawText(w - 10, h - 10, 'ramesaliyev', { align: 'right' });
+      $drawText(w - 10, h - 42, '2024', { align: 'right' });
+      $drawText(w - 10, h - 27, 'trigo-visualization', { align: 'right' });
+      $drawText(w - 10, h - 10, 'Raviranjan', { align: 'right' });
     }
 
     // Increase degre.
@@ -379,9 +379,9 @@
     if (adjacent < 0) {
       degree += 180;
     }
-    
+
     state.degree = degree;
-    
+
     // Force draw to avoid glitches!
     draw(true);
   };
@@ -416,7 +416,7 @@
   const resize = () => {
     const width = canvasWrapper.clientWidth;
     const height = canvasWrapper.clientHeight;
-    
+
     if (canvas.width !== width || canvas.height !== height) {
       canvas.width = width;
       canvas.height = height;
